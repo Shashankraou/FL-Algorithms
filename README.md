@@ -527,29 +527,5 @@ Creates two subplots:
 
 ---
 
-## Key Implementation Details
 
-### Why `copy.deepcopy()` in gossip?
 
-Without deep copy, all clients would reference the same tensor memory:
-```python
-# BAD:
-state = model.state_dict()  # Still points to model's memory
-model.fc1.weight.data = new_value  # Changes state too!
-
-# GOOD:
-state = copy.deepcopy(model.state_dict())  # Independent copy
-model.fc1.weight.data = new_value  # state unchanged
-```
-
-### Why recreate optimizer each round?
-
-Simplification. Persistent optimizers would maintain momentum/Adam state across rounds. Here momentum resets each round.
-
-### Why IID data split?
-
-Easiest case. Real FL typically has non-IID data where each client has skewed distributions. That's where D-FedPer excels.
-
-### Why gossip every 3 rounds?
-
-Trade-off between communication cost and convergence speed. More frequent = faster but more expensive.
