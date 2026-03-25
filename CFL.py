@@ -336,7 +336,7 @@ strategy = fl.server.strategy.FedAvg(
 history_per = fl.simulation.start_simulation(
     client_fn=client_fn_per,          # Use FedPer clients
     num_clients=NUM_CLIENTS,          # Total number of clients
-    config=fl.server.ServerConfig(num_rounds=3),  # Train for 3 rounds
+    config=fl.server.ServerConfig(num_rounds=20),  # Train for 20 rounds
     strategy=strategy,                # Server aggregates using FedAvg
 )
 
