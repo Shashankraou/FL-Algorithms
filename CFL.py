@@ -64,7 +64,7 @@ def create_model():
     return model
 
 # Number of clients in federated learning
-NUM_CLIENTS = 3
+NUM_CLIENTS = 5
 
 # Divide training data equally among clients
 client_data_size = len(x_train) // NUM_CLIENTS
